@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 
+
 /**
  * The view for the Level Player screen.
  */
@@ -108,7 +109,14 @@ public class LevelPlayerView extends JPanel {
 	public JLabel getMaxNumWordsLabel() {
 		return maxNumWordsLabel;
 	}
-
+	
+	/** 
+	 * @return the maxNumWordsValueLabel
+	 */
+	public JLabel getMaxNumWordsValueLabel(){
+		return maxNumWordsValueLabel;
+	}
+	
 	/**
 	 * @return the timerLabel
 	 */
@@ -143,6 +151,14 @@ public class LevelPlayerView extends JPanel {
 	public JLabel getScoreLabel() {
 		return scoreLabel;
 	}
+	
+	/**
+	 * @return the scoreValueLabel
+	 * @return
+	 */
+	public JLabel getScoreValueLabel(){
+		return scoreValueLabel;
+	}
 
 	/**
 	 * @return the starThresholdLabel
@@ -158,6 +174,13 @@ public class LevelPlayerView extends JPanel {
 		return foundWordsLabel;
 	}
 
+	/**
+	 * @return the foundWordsListModel
+	 */
+	public DefaultListModel<String> getFoundWordsListModel(){
+		return foundWordsListModel;
+	}
+	
 	/**
 	 * Initializes the view.
 	 */
@@ -289,8 +312,8 @@ public class LevelPlayerView extends JPanel {
 
 		// add the board view
 		boardView = new BoardView();
-		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
-		boardView.setPreferredSize(new Dimension(750, 750));
+		//boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		//boardView.setPreferredSize(new Dimension(750, 750));
 		add(boardView, BorderLayout.CENTER);
 	}
 }

@@ -8,20 +8,27 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * A star is an object which can be obtained during game play.
+ */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Star {
-	
-	/* ~~~~~                                                                               ~~~~~ *
-	 * Class Attributes                                                                          *
-	 * ~~~~~                                                                               ~~~~~ */
-	int threshold;
+	@XmlElement
+	private int threshold;
 
 	/**
-	 * Creates a new star with an uninitialized threshold.
+	 * Creates a new star with default information.
 	 * Precondition: None.
-	 * Postcondition: A new star is created with an uninitialized score threshold.
+	 * Postcondition: A new star is created with a default score threshold.
 	 */
     public Star() {
-    	this.threshold = -1;
+    	threshold = 0;
     }
 
     /**
@@ -40,15 +47,12 @@ public class Star {
     
     /**
 	 * Gets the score threshold required to obtain this star. 
-	 * Precondition: The threshold has been initialized. 
+	 * Precondition: None. 
 	 * Postcondition: The score threshold is returned.
 	 * 
 	 * @return The score threshold.
-	 * @exception IllegalStateException
-	 *                Thrown if this is called before the threshold has been
-	 *                initialized.
 	 */
-	public int getThreshold() throws IllegalStateException {
+	public int getThreshold() {
 		return threshold;
 	}
 
@@ -69,17 +73,14 @@ public class Star {
 	/**
 	 * Determines whether this star is obtained based on its threshold and the
 	 * given score. 
-	 * Precondition: The threshold has been initialized.
+	 * Precondition: None.
 	 * Postcondition: Returns whether the given score is enough to obtain this star.
 	 * 
 	 * @param score
 	 *            The integer representing the game's current score
 	 * @return Whether the given score is enough to obtain this star.
-	 * @exception IllegalStateException
-	 *                Thrown if this is called before the threshold has been
-	 *                initialized.
 	 */
-    public boolean isObtained(int score) throws IllegalStateException {
+    public boolean isObtained(int score) {
         return score >= threshold;
     }
     

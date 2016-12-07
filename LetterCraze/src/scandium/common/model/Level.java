@@ -5,19 +5,37 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
 /**
  * A class which holds basic information about a Level.
  */
+@XmlSeeAlso({PuzzleLevel.class, LightningLevel.class, ThemeLevel.class})
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Level {
+    @XmlElement
     private String name;
+    @XmlElement
     private Board board;
+    @XmlElementWrapper(name = "stars")
+    @XmlElement(name = "star")
     private Star[] stars;
     
     /**
-     * Creates a new, uninitialized Level
+     * Creates a new Level with the default information.
      */
     public Level() {
-    	stars = new Star[3];
+    	this.name = new String();
+    	this.board = new Board();
+    	this.stars = new Star[] {
+    			new Star(),
+    			new Star(),
+    			new Star()
+    	};
     }
 
     /**

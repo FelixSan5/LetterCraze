@@ -5,15 +5,41 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * A square which a Board consists of.
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BoardSquare {
+	@XmlElement
     private int row;
+	@XmlElement
     private int col;
-    private Board board;
+	@XmlElement
     private Tile tile;
+	@XmlElement
     private boolean enabled;
+	@XmlTransient
+    private Board board;
+	
+    /**
+	 * Creates a board square with uninitialized data. 
+	 * Precondition: None.
+	 * Postcondition: The tile is created with uninitialized data.
+     */
+    @SuppressWarnings("unused") // used only for the XML Serializer
+	private BoardSquare() {
+    	row = -1;
+    	col = -1;
+    	enabled = true;
+    }
+    
     /**
      * Creates a new square on the given Board.
      * Precondition: The board is not null.

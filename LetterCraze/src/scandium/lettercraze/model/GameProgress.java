@@ -28,7 +28,6 @@ public class GameProgress {
 		//if current level progress already exists, throw exception
 		if (this.created == false){
 			this.levelProgresses = new HashMap<Level, LevelProgress>();
-			this.currentLevelProgress = new LevelProgress();
 			currentLevelProgress.setPlaying(false);
 			this.created = true;
 		} else{

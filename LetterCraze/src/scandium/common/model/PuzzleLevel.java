@@ -5,18 +5,26 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * A type of level which has a maximum number of words.
  */
+@XmlRootElement(name = "puzzleLevel")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PuzzleLevel extends Level {
+	@XmlElement
     private int maxNumWords;
 
     /**
-     * Creates a new uninitiated PuzzleLevel.
+     * Creates a new Puzzle level with the default information.
      */
     public PuzzleLevel() {
     	super();
-    	this.maxNumWords = -1;
+    	maxNumWords = 0;
     }
 
     /**

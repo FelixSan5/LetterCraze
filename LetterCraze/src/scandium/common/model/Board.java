@@ -5,35 +5,58 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import scandium.common.tool.LetterDictionary;
 
 /**
- * A play area container for Tiles.
+ * A play area container for tiles, which is made out of board squares.
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Board {
+	@XmlElementWrapper(name = "rows")
+	@XmlElement(name = "row")
     private BoardSquare[][] squares;
+	@XmlTransient
 	private Word selectedWord;
+	@XmlElement
 	private GravityDirection gravityDirection;
+	@XmlElement
 	private boolean shouldRegenerate;
 
+	/**
+	 * Creates a new Board with the default information.
+	 * Precondition: None.
+	 * Postcondition: The board is created with default information.
+	 */
+	public Board() {
+		this(true, GravityDirection.Up);
+	}
 
 	/**
-	 * Creates a new Board. 
-	 * Postcondition: All of the squares will be created, and the gravity direction and should 
-	 * regenerate will be updated to indicate the given information. All of the squares will be
-	 * enabled by default.
-	 * 
-	 * @param shouldRegenerate
-	 *            Whether new Tiles should be generated.
-	 * @param gravityDirection
-	 *            The direction of gravity for the board.
+	 * Creates a new Board with the given information.
+	 * Precondition: None.
+	 * Postcondition: The board is created with the given information.
 	 */
-    public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
-        this.shouldRegenerate = shouldRegenerate;
-        this.gravityDirection = gravityDirection;
-        this.squares = new BoardSquare[6][6];
-    }
+	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
+		this.shouldRegenerate = shouldRegenerate;
+		this.gravityDirection = gravityDirection;
+		this.squares = new BoardSquare[6][6];
 
+		// create all of the squares
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 6; col++) {
+				squares[row][col] = new BoardSquare(row, col, this, true);
+			}
+		}
+	}
+	
 	/**
 	 * Gets the square at the given position. 
 	 * Precondition: The indicated position is a valid one. 
@@ -126,6 +149,37 @@ public class Board {
 	 * @return Whether any tiles were moved.
 	 */
 	public boolean applyGravity() {
+		/* indicator of tile movement */
+		boolean moved_tiles = false;
+		/* Apply Upwards Gravity */
+		if(getGravityDirection() == GravityDirection.Up){
+			for(int row = 0; row < 6; row++){
+				boardSquareLoop:
+				for(int col = 0; col < 6; col++){
+					/* Get the current Square */
+					BoardSquare this_square = squares[row][col];
+					/* Determine if it needs to be filled */
+					if(this_square.isEnabled() && this_square.isEmpty()){
+						/* Determine if the lower squares have a tile to fill it with */
+						for(int i = row + 1; i < 6; i++){
+							BoardSquare possible_filler = squares[i][col];
+							if(possible_filler.isEnabled() && !possible_filler.isEmpty()){
+								/* Transfer Tile contents */
+								Tile t = possible_filler.getTile();
+								possible_filler.setTile(null);
+								this_square.setTile(t);
+								/* Continue to the next board Square in BoardQuareLoop */
+								continue boardSquareLoop;
+							}
+						}
+					}
+				}
+			}
+		}else System.out.println("Have not yet implemented other gravity directions");
+		
+		return moved_tiles;
+		
+		/*
 		boolean didItWork = false;
 		if(this.getGravityDirection() == GravityDirection.Up){
 	        int indicator = 0;
@@ -205,6 +259,7 @@ public class Board {
 		}
 		
 		return didItWork;
+		*/
 	}
 	
 	/**
@@ -272,6 +327,7 @@ public class Board {
 	 *             Thrown if the given square is not in this board.
 	 */
 	public boolean selectSquare(BoardSquare square) throws IllegalArgumentException {
+		if (selectedWord == null) return false;
 		if (selectedWord.addSelectedBoardSquare(square)){
     		return true;
     	}else{

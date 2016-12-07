@@ -7,19 +7,31 @@ package scandium.common.model;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * A type of Level with a predefined list of theme words.
  */
+@XmlRootElement(name = "themeLevel")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ThemeLevel extends Level {
+	@XmlElement
 	private String theme;
-	ArrayList<String> themeWords;
+	@XmlElementWrapper(name = "themeWords")
+	@XmlElement(name = "word")
+	private ArrayList<String> themeWords;
 
     /**
-     * Creates a new uninitialized Theme Level.
+     * Creates a new Theme level with the default information.
      */
     public ThemeLevel() {
     	super();
-    	this.themeWords = new ArrayList<String>();
+    	theme = new String();
+    	themeWords = new ArrayList<String>();
     }
 
     /**
@@ -77,7 +89,7 @@ public class ThemeLevel extends Level {
      */
     @Override
     public ThemeLevel copy() {
-    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard(), super.getStars(), theme, themeWords);
+    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard(), super.getStars(), theme, new ArrayList<String>(themeWords));
         return levelCopy;
     }
 

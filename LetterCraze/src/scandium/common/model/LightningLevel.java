@@ -5,18 +5,26 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * A type of Level which has a time limit.
  */
+@XmlRootElement(name = "lightningLevel")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LightningLevel extends Level {
+	@XmlElement
     private int timeLimit;
     
     /**
-     * Creates a new uninitialized Lightning Level.
+     * Creates a new Lightning Level with the default information.
      */
     public LightningLevel() {
     	super();
-    	timeLimit = -1;
+    	timeLimit = 0;
     }
 
     /**

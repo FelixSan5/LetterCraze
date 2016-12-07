@@ -183,7 +183,7 @@ public class LetterDictionary {
      * @return Tile
      */
     public Tile getRandomTile() {
-    	int rand = random.nextInt(1000);
+    	int rand = random.nextInt(10000);
     	String letter = null;
     	int score = -1;
     	double relative_freq = 0;

@@ -9,14 +9,31 @@
  */
 package scandium.common.model;
 
-public class Tile {
-	
-	/* ~~~~~                                                                               ~~~~~ *
-	 * Class Attributes                                                                          *
-	 * ~~~~~                                                                               ~~~~~ */
-    String content;
-    int score;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * An item which contains content and a score that is associated with it.
+ */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Tile {
+	@XmlElement
+    private String content;
+	@XmlElement
+    private int score;
+
+    /**
+	 * Creates a tile with default information. 
+	 * Precondition: None.
+	 * Postcondition: The tile is created with default information.
+	 */
+	public Tile() {
+		this(new String(), 0);
+	}
+    
     /**
 	 * Creates a tile with the given content and score. 
 	 * Precondition: The content is not null and not empty, and the score is non-negative.
@@ -31,7 +48,8 @@ public class Tile {
 	 * @throws NullPointerException
 	 *             Thrown if content is null.
 	 */
-    public Tile(String content, int score) throws IllegalArgumentException, NullPointerException {
+    public Tile(String content, int score)
+    		throws IllegalArgumentException, NullPointerException {
     	this.content = content;
     	this.score = score;
     }

@@ -107,6 +107,10 @@ public class Application extends JFrame{
 		return splash_screen;
 	}
 	
+	public Model getModel(){
+		return this.model;
+	}
+	
 	/* ~~~~~                                                                               ~~~~~ *
 	 * GUI Logic for Controllers                                                                 *
 	 * ~~~~~                                                                               ~~~~~ */

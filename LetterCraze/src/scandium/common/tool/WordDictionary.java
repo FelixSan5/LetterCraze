@@ -7,6 +7,7 @@ package scandium.common.tool;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -34,9 +35,11 @@ public class WordDictionary {
      * This function initializes the dictionary to hold the words stored in Dictionary.txt
      */
     void initialize(){
+     	
 		Iterator<String> it = null;
 		try {
-			it = new StringFileIterator(new File (".", dictionary_file));
+	    	URL url = getClass().getResource("Dictionary.txt");
+			it = new StringFileIterator(new File (url.getPath()));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
