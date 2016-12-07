@@ -29,7 +29,7 @@ public class CreateNewLevelController extends MouseAdapter{
     /**
      * @param MouseEvent me
      */
-    public void mouseClicked(MouseEvent me) {
+    public void mousePressed(MouseEvent me) {
     	app.setViewLevelEditor();
     }
 

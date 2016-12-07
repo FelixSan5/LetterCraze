@@ -6,7 +6,7 @@ import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium
+ * @author Felix
  */
 public class SpecifyLevelTypeController {
 

@@ -1,44 +1,39 @@
 package scandium.levelbuilder.controller;
 
-import java.awt.event.ActionEvent;
+
+
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium
+ * @author Felix
  */
 public class DisableBoardSquareController {
 
-    /**
-     * Default constructor
-     */
-    public DisableBoardSquareController() {
-    }
-
-    /**
-     * 
-     */
+	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
-
+    
     /**
-     * @param model 
-     * @param app
+     * @param m 
+     * @param a
      */
-    public DisableBoardSquareController(Model model, Application app) {
-        // TODO implement here
+    public DisableBoardSquareController(Model m, Application a) {
+    	this.model = m;
+    	this.app = a;
     }
 
     /**
-     * @param ActionEvent ae
+     * @param MouseEvent me
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    public void mousePressed(MouseEvent me) {
+    	((JLabel)this).setBackground(Color.BLACK);
     }
 
 }
