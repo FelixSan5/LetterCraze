@@ -19,21 +19,23 @@ public class DisableBoardSquareController {
 	//attributes
     Model model;
     Application app;
+    JLabel square;
     
     /**
      * @param m 
      * @param a
      */
-    public DisableBoardSquareController(Model m, Application a) {
+    public DisableBoardSquareController(JLabel jl, Model m, Application a) {
     	this.model = m;
     	this.app = a;
+    	this.square = jl;
     }
 
     /**
      * @param MouseEvent me
      */
     public void mousePressed(MouseEvent me) {
-    	((JLabel)this).setBackground(Color.BLACK);
+    	this.square.setBackground(Color.BLACK);
     }
 
 }

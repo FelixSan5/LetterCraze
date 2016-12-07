@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import scandium.levelbuilder.controller.CreateNewLevelController;
+import scandium.levelbuilder.controller.EnableBoardSquareController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.model.Model;
 
@@ -77,6 +78,8 @@ public class Application extends JFrame{
 		//controllers
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
 		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
+		//need method to get every JLabel "square" in BoardView
+		//level_editor.getBoardView().getBoardSquares().addMouseListener(new EnableBoardSquareController(JLabel "square", model, this));
 	}
 	
 	/* ~~~~~                                                                               ~~~~~ *

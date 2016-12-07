@@ -17,21 +17,23 @@ public class EnableBoardSquareController {
 	//attributes
     Model model;
     Application app;
+    JLabel square;
     
     /**
      * @param m 
      * @param a
      */
-    public EnableBoardSquareController(Model m, Application a) {
+    public EnableBoardSquareController(JLabel jl,Model m, Application a) {
     	this.model = m;
     	this.app = a;
+    	this.square = jl;
     }
 
     /**
      * @param MouseEvent me
      */
     public void mousePressed(MouseEvent me) {
-    	((JLabel)this).setBackground(Color.WHITE);
+    	this.square.setBackground(Color.WHITE);
     }
 
 
